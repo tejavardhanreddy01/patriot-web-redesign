@@ -7,6 +7,7 @@ const courseDatabase = [
         courseName: "Introduction to Computer Science",
         professor: "Dr. Smith",
         credits: 3,
+        MeetingTime: "Thursday | 3:10 pm - 6:30pm",
         description: "An introductory course on the fundamentals of computer science."
     },
     {
@@ -15,6 +16,7 @@ const courseDatabase = [
         courseName: "Calculus I",
         professor: "Prof. Paul",
         credits: 4,
+        MeetingTime: "Tuesday | 12:10 pm - 1:30pm",
         description: "A first course in calculus covering limits, derivatives, and integrals."
     },
 

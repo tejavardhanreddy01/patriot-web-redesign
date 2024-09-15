@@ -19,7 +19,7 @@ const RegistrationCard = ({ registration }) => {
                 data-resizable
                 sx={{
                     width: 250,
-                    height: 350,
+                    height: 250,
                     display: 'flex',
                     flexDirection: 'column',
                     textAlign: 'center',

@@ -18,13 +18,12 @@ const PersonalinfoCard = ({ personalInfo }) => {
             <Card
                 data-resizable
                 sx={{
-                    width: 200,
                     height: 200,
                     display: 'flex',
                     flexDirection: 'column',
                     textAlign: 'center',
                     alignItems: 'center',
-                    width: 343,
+                    width: 250,
                     // to make the demo resizable
                     overflow: 'hidden',
                     '--icon-size': '100px',

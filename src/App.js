@@ -12,6 +12,8 @@ import StudentRegisteration from "./Pages/Registration/StudentRegisteration";
 import PersonalProfile from "./Pages/PersonalInformation/PersonalProfile";
 import StudentProfile from "./Pages/StudentServices/StudentProfile";
 import Help from "./Pages/help";
+import EmployeeDashboard from "./Pages/Employee Services/EmployeeDashboard";
+import EmployeeTimesheet from "./Pages/Employee Services/EmployeeTimesheet";
 
 export default function App() {
   return (
@@ -29,6 +31,9 @@ export default function App() {
         <Route path="/personalprofile" element={<PersonalProfile />} />
         <Route path="/studentprofile" element={<StudentProfile />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/employeedashboard" element={<EmployeeDashboard />} />
+        <Route path="/employeetimesheet" element={<EmployeeTimesheet />} />
+
 
 
 
