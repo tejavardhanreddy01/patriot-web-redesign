@@ -11,15 +11,15 @@ import Avatar from '@mui/joy/Avatar';
 import { Link } from "@mui/material";
 
 
-const studentServicesCard = ({ studentServices }) => {
+const Cards = ({ studentServices }) => {
 
     return (
         <div>
             <Card
-                data-resizable
+                // data-resizable
                 sx={{
                     width: 250,
-                    height: 350,
+                    height: 300,
                     display: 'flex',
                     flexDirection: 'column',
                     textAlign: 'center',
@@ -43,9 +43,9 @@ const studentServicesCard = ({ studentServices }) => {
                             bgcolor: 'background.surface',
                             position: 'relative',
                         }}    >
-                        {/* <div>
-                            <Avatar src={studentServices.avatar.file.url} sx={{ '--Avatar-size': '6rem' }} />
-                        </div> */}
+
+                        {/* <Avatar src={studentServices.avatar.file.url} sx={{ '--Avatar-size': '6rem' }} /> */}
+
                     </AspectRatio>
                 </CardOverflow>
                 <Typography level="title-lg" sx={{ mt: 'calc(var(--icon-size) / 2)' }}>
@@ -59,9 +59,9 @@ const studentServicesCard = ({ studentServices }) => {
 
                 </Typography>
                 <CardContent sx={{ maxWidth: '40ch' }}>
-                    <ul>
+                    <div>
                         {studentServices.description}
-                    </ul>
+                    </div>
 
                 </CardContent>
                 <CardActions
@@ -79,4 +79,5 @@ const studentServicesCard = ({ studentServices }) => {
     );
 }
 
-export default studentServicesCard;
+export default Cards;
+

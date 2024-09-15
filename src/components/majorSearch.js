@@ -54,7 +54,7 @@ export default function MultipleSelect() {
     return (
         <div>
             <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-name-label">Major</InputLabel>
+                <InputLabel id="demo-multiple-name-label">Subject</InputLabel>
                 <Select
                     labelId="demo-multiple-name-label"
                     id="demo-multiple-name"

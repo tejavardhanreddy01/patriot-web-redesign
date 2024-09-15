@@ -9,7 +9,7 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import Typography from '@mui/joy/Typography';
 import Avatar from '@mui/joy/Avatar';
 import { Link } from "@mui/material";
-import useContentful from './contentful/useContentful';
+
 
 const Cards = ({ categories }) => {
 

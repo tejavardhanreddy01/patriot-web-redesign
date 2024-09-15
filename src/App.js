@@ -9,6 +9,9 @@ import Header from "./components/header";
 import Registration from "./Pages/StudentServices/Registration";
 import RegPlan from "./Pages/Registration/RegPlan";
 import StudentRegisteration from "./Pages/Registration/StudentRegisteration";
+import PersonalProfile from "./Pages/PersonalInformation/PersonalProfile";
+import StudentProfile from "./Pages/StudentServices/StudentProfile";
+import Help from "./Pages/help";
 
 export default function App() {
   return (
@@ -23,6 +26,10 @@ export default function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/regplan" element={<RegPlan />} />
         <Route path="/studentregistration" element={<StudentRegisteration />} />
+        <Route path="/personalprofile" element={<PersonalProfile />} />
+        <Route path="/studentprofile" element={<StudentProfile />} />
+        <Route path="/help" element={<Help />} />
+
 
 
       </Routes>
