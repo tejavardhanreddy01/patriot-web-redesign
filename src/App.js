@@ -14,11 +14,16 @@ import StudentProfile from "./Pages/StudentServices/StudentProfile";
 import Help from "./Pages/help";
 import EmployeeDashboard from "./Pages/Employee Services/EmployeeDashboard";
 import EmployeeTimesheet from "./Pages/Employee Services/EmployeeTimesheet";
+<<<<<<< HEAD
+import FinancialDashboard from "./Pages/FinancialAidServices/FinancialDashboard";
+// import FinancialInfo from "./Pages/Financial Aid/FinancialInfo";
+=======
 
 import FinancialDashboard from "./Pages/FinancialAidServices/FinancialDashboard";
 
 // import FinancialInfo from "./Pages/Financial Aid/FinancialInfo";
 
+>>>>>>> 90df7c213dde546774a7e8bee3c81ba8d785ae77
 
 export default function App() {
   return (
@@ -40,14 +45,27 @@ export default function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/employeedashboard" element={<EmployeeDashboard />} />
         <Route path="/employeetimesheet" element={<EmployeeTimesheet />} />
+<<<<<<< HEAD
+        <Route path="/financialAidDashboard" element={<FinancialDashboard />} />
+=======
 
         <Route path="/financialAidDashboard" element={<FinancialDashboard />} />
 
+>>>>>>> 90df7c213dde546774a7e8bee3c81ba8d785ae77
         {/* <Route path="/financialinfo" element={<FinancialInfo />} /> */}
 
       </Routes >
 
+<<<<<<< HEAD
+
+
+
+      </Routes>
+
+    </div>
+=======
     </div >
+>>>>>>> 90df7c213dde546774a7e8bee3c81ba8d785ae77
     // </div >
   )
 }
