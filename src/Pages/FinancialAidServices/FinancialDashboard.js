@@ -11,7 +11,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const FinancialDashboard = () => {
     const [userInfo, setUserInfo] = useState({
 
-        Offer: { Info: 'No award information is available for this aid year'},
+        Offer: { Info: 'No award information is available for this aid year' },
         FinancialAidHistory: { Info: 'There is no award history available.' },
         Resources: { Info: 'No Responses to Questions or Terms and Conditions are found.' },
         Notifications: { Info: 'No Withdrawal Information is found. Please read all Notifications if exist.' },
@@ -70,15 +70,15 @@ const FinancialDashboard = () => {
         return fields;
     };
 
-/*const FinancialDashboard = () => {
-   
-
-    return (
-       <h1>This is financial Aid Dashboard</h1>
-    );
-};
-
-export default FinancialDashboard;*/
+    /*const FinancialDashboard = () => {
+       
+    
+        return (
+           <h1>This is financial Aid Dashboard</h1>
+        );
+    };
+    
+    export default FinancialDashboard;*/
 
 
 
@@ -96,7 +96,7 @@ export default FinancialDashboard;*/
                                 <Avatar sx={{ width: 60, height: 60, alignItems: "center" }}>
                                     <PersonIcon />
                                 </Avatar>
-                                <Typography variant="h6">{userInfo.EmployeeInfo.Offers || 'Not Provided'}</Typography>
+                                <Typography variant="h6">{userInfo.Offer.Info || 'Not Provided'}</Typography>
                                 <br />
                                 <a href="/personalprofile">
                                     <button> My Profile</button>
@@ -112,7 +112,7 @@ export default FinancialDashboard;*/
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                             <Typography variant="h6">Offer</Typography>
                         </AccordionSummary>
-                        
+
                     </Accordion>
 
                     <Accordion defaultExpanded>
@@ -128,7 +128,7 @@ export default FinancialDashboard;*/
                     </Accordion>
                     <Accordion defaultExpanded>
                         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                            <Typography variant="h6">Nptifications</Typography>
+                            <Typography variant="h6">Notifications</Typography>
                         </AccordionSummary>
                     </Accordion>
                     <Accordion defaultExpanded>
@@ -142,7 +142,7 @@ export default FinancialDashboard;*/
                         </AccordionSummary>
                     </Accordion>
 
-                   
+
                 </Box>
             </Box>
 
