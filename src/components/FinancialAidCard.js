@@ -43,9 +43,6 @@ const financialAidCard = ({ financialAid }) => {
                             bgcolor: 'background.surface',
                             position: 'relative',
                         }}    >
-                        {/* <div>
-                            <Avatar src={financialAid.avatar.file.url} sx={{ '--Avatar-size': '6rem' }} />
-                        </div> */}
                     </AspectRatio>
                 </CardOverflow>
                 <Typography level="title-lg" sx={{ mt: 'calc(var(--icon-size) / 2)' }}>

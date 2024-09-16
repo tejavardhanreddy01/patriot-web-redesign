@@ -12,22 +12,11 @@ const PersonalProfile = () => {
     const [userInfo, setUserInfo] = useState({
         PersonalInfo: { UserName: '', Email: '', HomeAddress: '', PhoneNumber: '', GNumber: '' },
         PersonalDetails: { FirstName: '', MiddleName: '', LastName: '', DOB: '', Sex: '', PersonalPronoun: '', GenderId: '' },
-<<<<<<< HEAD
-        Email: {GMUEmailID: '', EmailID: '' },
-        PhoneNumber: { PhoneNumber: ''},
-        OffcampusResidence: { Address: '' },
-        EmergencyContact: { Address: '', PhoneNumber: '' },
-        additionalDetails: { },
-=======
         Email: { GMUEmail: '', FAFSAParentEmail: '', FAFSAStudentEmail: '', OtherEmail1: '', OtherEmail2: '' },
         PhoneNumber: { phonenum1: '', phonenum2: '', premresphone: '' },
         Address: { HomeAddress: '' },
         EmergencyContact: { EmergencyCont: '' },
         AdditionalDetails: { EthnicityRace: '', VeteranClass: '', DisabilityStatus: '' }
-
-
-
->>>>>>> e1b16ab3e582ce2e9da87e061cb1dded78340ce4
     });
 
     const [open, setOpen] = useState(false);
@@ -156,7 +145,7 @@ const PersonalProfile = () => {
                                 <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
                                     <Typography><strong>GMU Email ID:</strong> {userInfo.PersonalDetails.GMUEmailID || 'Not Provided'}</Typography>
                                     <Typography><strong>Email ID:</strong> {userInfo.PersonalDetails.EmailID || 'Not Provided'}</Typography>
-                                    
+
                                 </Box>
                             </Box>
                             <Box>
@@ -180,7 +169,7 @@ const PersonalProfile = () => {
                                 <p>-----------------------------</p>
                                 <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
                                     <Typography><strong>Phone Number:</strong> {userInfo.PersonalDetails.PhoneNumber || 'Not Provided'}</Typography>
-                                   
+
                                 </Box>
                             </Box>
                             <Box>
@@ -204,7 +193,7 @@ const PersonalProfile = () => {
                                 <p>-----------------------------</p>
                                 <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
                                     <Typography><strong>Address:</strong> {userInfo.PersonalDetails.Address || 'Not Provided'}</Typography>
-                                   
+
                                 </Box>
                             </Box>
                             <Box>
@@ -228,7 +217,7 @@ const PersonalProfile = () => {
                                 <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
                                     <Typography><strong>Address:</strong> {userInfo.PersonalDetails.Address || 'Not Provided'}</Typography>
                                     <Typography><strong>PhoneNumber:</strong> {userInfo.PersonalDetails.PhoneNumber || 'Not Provided'}</Typography>
-                                    
+
                                 </Box>
                             </Box>
                             <Box>
