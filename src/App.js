@@ -14,10 +14,13 @@ import StudentProfile from "./Pages/StudentServices/StudentProfile";
 import Help from "./Pages/help";
 import EmployeeDashboard from "./Pages/Employee Services/EmployeeDashboard";
 import EmployeeTimesheet from "./Pages/Employee Services/EmployeeTimesheet";
+// import FinancialInfo from "./Pages/Financial Aid/FinancialInfo";
 
 export default function App() {
   return (
     <div>
+      {/* <div style={{ backgroundColor: '#4CAF50', minHeight: '100vh' }}> Set background color and full height */}
+
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -33,6 +36,8 @@ export default function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/employeedashboard" element={<EmployeeDashboard />} />
         <Route path="/employeetimesheet" element={<EmployeeTimesheet />} />
+        {/* <Route path="/financialinfo" element={<FinancialInfo />} /> */}
+
 
 
 
@@ -40,5 +45,6 @@ export default function App() {
       </Routes>
 
     </div>
+    // </div >
   )
 }
