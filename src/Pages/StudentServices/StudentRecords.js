@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import {
-    Box, Typography, Card, CardContent, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Button, Avatar, Accordion, AccordionSummary, AccordionDetails
+    Box, Typography, Card, CardContent, Select, MenuItem, Dialog, DialogTitle, DialogContent, DialogActions, Button, Avatar, Accordion, AccordionSummary, AccordionDetails
 } from '@mui/material';
-//import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SchoolIcon from '@mui/icons-material/School';
 
@@ -14,54 +13,34 @@ const StudentRecords = () => {
             { course: 'Data Structures', grade: 'A-', semester: 'Spring 2024' },
         ],
         holds: ['Library Fee', 'Tuition Due'],
-        expectedGraduationDate: 'May 2025',
+        expectedGraduationDate: 'August 2025',
         unofficialTranscriptLink: 'link-to-unofficial-transcript.pdf',
         officialTranscriptOrderLink: 'link-to-order-official-transcript',
     });
 
     const [open, setOpen] = useState(false);
-    const [editingCategory, setEditingCategory] = useState(null);
+    const [selectedMonth, setSelectedMonth] = useState('August');
+    const [selectedYear, setSelectedYear] = useState(2025);
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const years = Array.from(new Array(10), (val, index) => 2024 + index);
 
-    const handleOpen = (category) => {
-        setEditingCategory(category);
+    const handleOpen = () => {
         setOpen(true);
     };
 
     const handleClose = () => {
         setOpen(false);
-        setEditingCategory(null);
     };
 
     const handleSave = () => {
+        const updatedDate = `${selectedMonth} ${selectedYear}`;
+        setStudentInfo((prevInfo) => ({
+            ...prevInfo,
+            expectedGraduationDate: updatedDate,
+        }));
         handleClose();
     };
-
-    const handleChange = (e, category) => {
-        const { name, value } = e.target;
-        setStudentInfo((prev) => ({
-            ...prev,
-            [category]: { ...prev[category], [name]: value },
-        }));
-    };
-
-    const renderFields = () => {
-        if (!editingCategory) return null;
-
-        const fields = Object.keys(studentInfo[editingCategory]).map((field) => (
-            <TextField
-                key={field}
-                label={field.replace(/([A-Z])/g, ' $1')} // Add spaces between camelCase words
-                name={field}
-                value={studentInfo[editingCategory][field]}
-                onChange={(e) => handleChange(e, editingCategory)}
-                fullWidth
-                margin="normal"
-            />
-        ));
-
-        return fields;
-    };
-
+    
     return (
         <Box sx={{ maxWidth: 1200, margin: '0 auto', padding: 4 }}>
             <Typography variant="h4" gutterBottom>Student Records</Typography>
@@ -132,7 +111,7 @@ const StudentRecords = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>{studentInfo.expectedGraduationDate}</Typography>
-                            <Button variant="contained" onClick={() => handleOpen('expectedGraduationDate')}>Update Graduation Date</Button>
+                            <Button variant="contained" onClick={handleOpen}>Update Graduation Date</Button>
                         </AccordionDetails>
                     </Accordion>
 
@@ -157,8 +136,35 @@ const StudentRecords = () => {
 
             {/* Edit Modal */}
             <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Edit {editingCategory}</DialogTitle>
-                <DialogContent>{renderFields()}</DialogContent>
+                <DialogTitle>Edit Expected Graduation Date</DialogTitle>
+                <DialogContent>
+                    <Select
+                        label="Month"
+                        value={selectedMonth}
+                        onChange={(e) => setSelectedMonth(e.target.value)}
+                        fullWidth
+                    >
+                        {months.map((month) => (
+                            <MenuItem key={month} value={month}>
+                                {month}
+                            </MenuItem>
+                        ))}
+                    </Select>
+
+                    <Select
+                        label="Year"
+                        value={selectedYear}
+                        onChange={(e) => setSelectedYear(e.target.value)}
+                        fullWidth
+                        sx={{ marginTop: 2 }}
+                    >
+                        {years.map((year) => (
+                            <MenuItem key={year} value={year}>
+                                {year}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">Cancel</Button>
                     <Button onClick={handleSave} color="primary">Save</Button>
