@@ -1,79 +1,58 @@
 import * as React from 'react';
-import { useState, useEffect } from "react";
-import AspectRatio from '@mui/joy/AspectRatio';
-import Button from '@mui/joy/Button';
-import Card from '@mui/joy/Card';
-import CardActions from '@mui/joy/CardActions';
-import CardContent from '@mui/joy/CardContent';
-import CardOverflow from '@mui/joy/CardOverflow';
-import Typography from '@mui/joy/Typography';
-import Avatar from '@mui/joy/Avatar';
-import { Link } from "@mui/material";
+import { Avatar, Box, Typography, Link, Button, Card, CardContent, CardOverflow, AspectRatio } from '@mui/joy';
 
 
-const financialAidCard = ({ financialAid }) => {
-
+const Cards = ({ financialAid }) => {
+    const imageUrl = financialAid?.avatar?.fields?.file?.url
+        ? `https:${financialAid.avatar.fields.file.url}`  // Ensure the URL is prefixed with 'https:'
+        : 'https://via.placeholder.com/345x140';
     return (
-        <div>
-            <Card
-                data-resizable
-                sx={{
-                    width: 250,
-                    height: 300,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    textAlign: 'center',
-                    alignItems: 'center',
-                    width: 343,
-                    // to make the demo resizable
-                    overflow: 'hidden',
-                    '--icon-size': '100px',
-                }} >
-                <CardOverflow variant="solid" color="success">
-                    <AspectRatio
-                        variant="outlined"
-                        color="warning"
-                        ratio="1"
-                        sx={{
-                            m: 'auto',
-                            transform: 'translateY(50%)',
-                            borderRadius: '50%',
-                            width: 'var(--icon-size)',
-                            boxShadow: 'sm',
-                            bgcolor: 'background.surface',
-                            position: 'relative',
-                        }}    >
-                    </AspectRatio>
-                </CardOverflow>
-                <Typography level="title-lg" sx={{ mt: 'calc(var(--icon-size) / 2)' }}>
-
-                    <Link href={financialAid.url} >
-                        <Button variant="outlined" sx={{ backgroundColor: 'gold', color: 'black', '&:hover': { backgroundColor: 'darkgoldenrod' } }}>
-                            {financialAid.name}
-                        </Button>
-                    </Link>
-
-
-                </Typography>
-                <CardContent sx={{ maxWidth: '40ch' }}>
-                    <ul>
-                        {financialAid.description}
-                    </ul>
-
-                </CardContent>
-                <CardActions
-                    orientation="vertical"
-                    buttonFlex={1}
+        <Card
+            sx={{
+                height: 290,
+                display: 'flex',
+                flexDirection: 'column',
+                textAlign: 'center',
+                alignItems: 'center',
+                width: 340,
+                overflow: 'hidden',
+                '--icon-size': '100px',
+            }}
+        >
+            <CardOverflow variant="solid" color="success">
+                <AspectRatio
+                    variant="outlined"
+                    color="warning"
+                    ratio="1"
                     sx={{
-                        '--Button-radius': '40px',
-                        width: 'clamp(min(100%, 160px), 50%, min(100%, 200px))',
-                    }} >
-                </CardActions>
-
-            </Card>
-
-        </div >
+                        m: 'auto',
+                        // Reduced transform to lower the avatar
+                        transform: 'translateY(30%)',
+                        borderRadius: '50%',
+                        width: 'var(--icon-size)',
+                        boxShadow: 'sm',
+                        bgcolor: 'background.surface',
+                        position: 'relative',
+                    }}
+                >
+                    <Avatar src={imageUrl} sx={{ '--Avatar-size': '2rem' }} />
+                </AspectRatio>
+            </CardOverflow>
+            {/* Increased margin-top to add more space between the avatar and button */}
+            <Typography level="title-lg" sx={{ mt: 4 }}>
+                <Link href={financialAid.url}>
+                    <Button variant="outlined" sx={{ backgroundColor: 'gold', color: 'black', '&:hover': { backgroundColor: 'darkgoldenrod' } }}>
+                        {financialAid.name}
+                    </Button>
+                </Link>
+            </Typography>
+            <CardContent sx={{ maxWidth: '40ch' }}>
+                <div>
+                    {financialAid.description}
+                </div>
+            </CardContent>
+        </Card>
     );
-}
+};
 
-export default financialAidCard;
+export default Cards;
