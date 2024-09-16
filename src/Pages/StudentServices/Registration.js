@@ -13,24 +13,24 @@ const Registration = () => {
 
     return (
         <Box
-            display="flex"                // Use flexbox for layout
-            flexDirection="column"        // Arrange items in a column
-            // Center horizontally
-            justifyContent="center"       // Center vertically
-            minHeight="100vh"             // Full viewport height
-            p={2}                         // Padding around the container
+            display="flex"
+            flexDirection="column"
+
+            justifyContent="center"
+            minHeight="100vh"
+            p={2}
             sx={{
-                overflow: 'hidden',        // Prevent container scrolling
-                maxWidth: '100%',          // Ensure container does not exceed screen width
-                boxSizing: 'border-box',   // Include padding in the element's total width and height
+                overflow: 'hidden',
+                maxWidth: '100%',
+                boxSizing: 'border-box',
             }}
         >
             <Box
-                display="flex"            // Use flexbox for the cards container
-                flexDirection="row"       // Arrange cards in a row
-                flexWrap="wrap"           // Allow wrapping if needed
-                justifyContent="center"   // Center cards horizontally
-                gap={2}                   // Space between cards
+                display="flex"
+                flexDirection="row"
+                flexWrap="wrap"
+                justifyContent="center"
+                gap={2}
             >
                 {registerOption.map((registration, index) => (
                     <RegistrationCard key={index} registration={registration} />

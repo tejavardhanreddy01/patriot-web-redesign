@@ -54,16 +54,15 @@ function ChildModal({ addClass }) {
     const handleAddClass = () => {
         if (courseFound) {
             addClass(courseFound);
-            setSubject(''); // Clear subject
-            setCourseNumber(''); // Clear course number
-            setCourseFound(null); // Clear found course
-            handleSearchCourse(); // Reset search
+            handleClose();
         }
     };
 
     return (
         <React.Fragment>
             <Button onClick={handleOpen}>Submit</Button>
+
+
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -105,6 +104,7 @@ function ChildModal({ addClass }) {
                                 <p><strong>Professor:</strong> {courseFound.professor}</p>
                                 <p><strong>Credits:</strong> {courseFound.credits}</p>
                                 <p><strong>Description:</strong> {courseFound.description}</p>
+                                <p><strong>Meeting Time:</strong>{courseFound.MeetingTime}</p>
                             </Box>
                         )}
 
@@ -114,12 +114,6 @@ function ChildModal({ addClass }) {
                         />
                     </Box>
                     <Button onClick={handleAddClass} disabled={!courseFound}>Add Class</Button>
-                    <Button onClick={() => {
-                        handleAddClass();
-                        setSubject(''); // Clear subject
-                        setCourseNumber(''); // Clear course number
-                        setCourseFound(null); // Clear found course
-                    }}>Add Another Class</Button>
                     <Button onClick={handleClose}>Close</Button>
                 </Box>
             </Modal>
@@ -139,7 +133,7 @@ export default function NestedModal() {
 
     return (
         <div>
-            <Button onClick={handleOpen} sx={{ color: 'black', textDecoration: 'none' }}>
+            <Button onClick={handleOpen} sx={{ border: '2px solid #4CAF50', padding: '10px 20px', borderRadius: '5px', marginTop: 5, marginLeft: 5 }}>
                 Select a Term to Register
             </Button>
             <Modal
@@ -178,7 +172,7 @@ export default function NestedModal() {
             </Modal>
 
             {/* Displaying the Schedule */}
-            <Box sx={{ mt: 4 }}>
+            <Box sx={{ mt: 4, marginLeft: 5 }}>
                 <h3>Your Schedule</h3>
                 {schedule.length === 0 ? (
                     <p>No classes added yet.</p>
