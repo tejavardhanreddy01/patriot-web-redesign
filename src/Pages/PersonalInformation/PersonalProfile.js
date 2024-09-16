@@ -6,17 +6,17 @@ import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
+import { Details } from '@mui/icons-material';
 
 const PersonalProfile = () => {
     const [userInfo, setUserInfo] = useState({
         PersonalInfo: { UserName: '', Email: '', HomeAddress: '', PhoneNumber: '', GNumber: '' },
         PersonalDetails: { FirstName: '', MiddleName: '', LastName: '', DOB: '', Sex: '', PersonalPronoun: '', GenderId: '' },
-        additionalInfo1: { field1: '', field2: '' },
-        additionalInfo2: { field1: '', field2: '' },
-        additionalInfo3: { field1: '', field2: '' },
-        additionalInfo4: { field1: '', field2: '' },
-        additionalInfo5: { field1: '', field2: '' },
-        additionalInfo6: { field1: '', field2: '' },
+        Email: {GMUEmailID: '', EmailID: '' },
+        PhoneNumber: { PhoneNumber: ''},
+        OffcampusResidence: { Address: '' },
+        EmergencyContact: { Address: '', PhoneNumber: '' },
+        additionalDetails: { },
     });
 
     const [open, setOpen] = useState(false);
@@ -136,6 +136,125 @@ const PersonalProfile = () => {
                             </Box>
                         </CardContent>
                     </Card>
+                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
+                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
+                                <PersonIcon />
+                            </Avatar>
+                            <Box sx={{ flex: 1 }}>
+                                <Typography variant="h6">Email Details</Typography>
+                                <p>-----------------------------</p>
+                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+                                    <Typography><strong>GMU Email ID:</strong> {userInfo.PersonalDetails.GMUEmailID || 'Not Provided'}</Typography>
+                                    <Typography><strong>Email ID:</strong> {userInfo.PersonalDetails.EmailID || 'Not Provided'}</Typography>
+                                    
+                                </Box>
+                            </Box>
+                            <Box>
+                                <IconButton onClick={() => handleOpen('Email')}>
+                                    <EditIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                                <IconButton onClick={() => handleDelete('Email')}>
+                                    <DeleteIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                            </Box>
+                        </CardContent>
+                    </Card>
+
+                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
+                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
+                                <PersonIcon />
+                            </Avatar>
+                            <Box sx={{ flex: 1 }}>
+                                <Typography variant="h6">Phone Number</Typography>
+                                <p>-----------------------------</p>
+                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+                                    <Typography><strong>Phone Number:</strong> {userInfo.PersonalDetails.PhoneNumber || 'Not Provided'}</Typography>
+                                   
+                                </Box>
+                            </Box>
+                            <Box>
+                                <IconButton onClick={() => handleOpen('PhoneNumber')}>
+                                    <EditIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                                <IconButton onClick={() => handleDelete('PhoneNumber')}>
+                                    <DeleteIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                            </Box>
+                        </CardContent>
+                    </Card>
+
+                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
+                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
+                                <PersonIcon />
+                            </Avatar>
+                            <Box sx={{ flex: 1 }}>
+                                <Typography variant="h6">Off Campus Residence</Typography>
+                                <p>-----------------------------</p>
+                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+                                    <Typography><strong>Address:</strong> {userInfo.PersonalDetails.Address || 'Not Provided'}</Typography>
+                                   
+                                </Box>
+                            </Box>
+                            <Box>
+                                <IconButton onClick={() => handleOpen('OffcampusResidence')}>
+                                    <EditIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                                <IconButton onClick={() => handleDelete('OffcampusResidence')}>
+                                    <DeleteIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
+                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
+                                <PersonIcon />
+                            </Avatar>
+                            <Box sx={{ flex: 1 }}>
+                                <Typography variant="h6">EmergencyContact</Typography>
+                                <p>-----------------------------</p>
+                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+                                    <Typography><strong>Address:</strong> {userInfo.PersonalDetails.Address || 'Not Provided'}</Typography>
+                                    <Typography><strong>PhoneNumber:</strong> {userInfo.PersonalDetails.PhoneNumber || 'Not Provided'}</Typography>
+                                    
+                                </Box>
+                            </Box>
+                            <Box>
+                                <IconButton onClick={() => handleOpen('EmergencyContact')}>
+                                    <EditIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                                <IconButton onClick={() => handleDelete('EmergencyContact')}>
+                                    <DeleteIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
+                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
+                                <PersonIcon />
+                            </Avatar>
+                            <Box sx={{ flex: 1 }}>
+                                <Typography variant="h6">additional Details</Typography>
+                                <p>-----------------------------</p>
+                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+                                    <Typography><strong></strong> {userInfo.PersonalDetails.additionalDetails || 'Not Provided'}</Typography>
+                                </Box>
+                            </Box>
+                            <Box>
+                                <IconButton onClick={() => handleOpen('additionalDetails')}>
+                                    <EditIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                                <IconButton onClick={() => handleDelete('additionalDetails')}>
+                                    <DeleteIcon sx={{ color: 'black' }} />
+                                </IconButton>
+                            </Box>
+                        </CardContent>
+                    </Card>
+
 
                     {/* Additional 6 Boxes */}
                     {[1, 2, 3, 4, 5, 6].map((index) => (

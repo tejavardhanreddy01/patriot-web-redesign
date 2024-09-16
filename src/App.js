@@ -14,6 +14,7 @@ import StudentProfile from "./Pages/StudentServices/StudentProfile";
 import Help from "./Pages/help";
 import EmployeeDashboard from "./Pages/Employee Services/EmployeeDashboard";
 import EmployeeTimesheet from "./Pages/Employee Services/EmployeeTimesheet";
+import FinancialDashboard from "./Pages/FinancialAidServices/FinancialDashboard";
 
 export default function App() {
   return (
@@ -33,9 +34,7 @@ export default function App() {
         <Route path="/help" element={<Help />} />
         <Route path="/employeedashboard" element={<EmployeeDashboard />} />
         <Route path="/employeetimesheet" element={<EmployeeTimesheet />} />
-
-
-
+        <Route path="/financialAidDashboard" element={<FinancialDashboard />} />
 
       </Routes>
 
