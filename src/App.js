@@ -16,7 +16,6 @@ import EmployeeDashboard from "./Pages/Employee Services/EmployeeDashboard";
 import EmployeeTimesheet from "./Pages/Employee Services/EmployeeTimesheet";
 
 import FinancialDashboard from "./Pages/FinancialAidServices/FinancialDashboard";
-
 // import FinancialInfo from "./Pages/Financial Aid/FinancialInfo";
 
 
@@ -44,10 +43,8 @@ export default function App() {
         <Route path="/financialAidDashboard" element={<FinancialDashboard />} />
 
         {/* <Route path="/financialinfo" element={<FinancialInfo />} /> */}
-
       </Routes >
-
     </div >
-    // </div >
-  )
+    // </div >
+  )
 }

@@ -13,6 +13,10 @@ import { Link } from "@mui/material";
 
 const PersonalinfoCard = ({ personalInfo }) => {
 
+    const imageUrl = personalInfo?.avatar?.fields?.file?.url
+        ? `https:${personalInfo.avatar.fields.file.url}`  // Ensure the URL is prefixed with 'https:'
+        : 'https://via.placeholder.com/345x140';
+
     return (
         <div>
             <Card
@@ -42,9 +46,9 @@ const PersonalinfoCard = ({ personalInfo }) => {
                             bgcolor: 'background.surface',
                             position: 'relative',
                         }}    >
-                        {/* <div>
-                            <Avatar src={personalInfo.avatar.file.url} sx={{ '--Avatar-size': '6rem' }} />
-                        </div> */}
+                        <div>
+                            <Avatar src={imageUrl} sx={{ '--Avatar-size': '6rem' }} />
+                        </div>
                     </AspectRatio>
                 </CardOverflow>
                 <Typography level="title-lg" sx={{ mt: 'calc(var(--icon-size) / 2)' }}>
