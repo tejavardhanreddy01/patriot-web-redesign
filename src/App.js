@@ -1,7 +1,7 @@
 import React from "react";
 import HomePage from "./Pages/HomePage/HomePage";
 import PersonalInfo from "./Pages/HomePage/PersonalInfo";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import StudentServices from "./Pages/HomePage/StudentServices";
 import EmployeeServices from "./Pages/HomePage/EmpServices";
 import FinancialAid from "./Pages/HomePage/FinancialAid";
@@ -27,27 +27,25 @@ export default function App() {
       {/* <div style={{ backgroundColor: '#4CAF50', minHeight: '100vh' }}> Set background color and full height */}
 
       <Header />
-      <Router>
-        <Switch>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/personalInfo" element={<PersonalInfo />} />
-          <Route path="/studentServices" element={<StudentServices />} />
-          <Route path="/employeeServices" element={<EmployeeServices />} />
-          <Route path="/financialAid" element={<FinancialAid />} />
-          <Route path="/registration" element={<Registration />} />
-          <Route path="/regplan" element={<RegPlan />} />
-          <Route path="/studentregistration" element={<StudentRegisteration />} />
-          <Route path="/personalprofile" element={<PersonalProfile />} />
-          <Route path="/studentprofile" element={<StudentProfile />} />
-          <Route path="/help" element={<Help />} />
-          <Route path="/employeedashboard" element={<EmployeeDashboard />} />
-          <Route path="/employeetimesheet" element={<EmployeeTimesheet />} />
-          <Route path="/studentrecords" element={<StudentRecords />} />
-          <Route path="/financialAidDashboard" element={<FinancialDashboard />} />
-          <Route path="/graduationdateaccordion" element={<GraduationDateAccordion />} />
-        </Switch>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/personalInfo" element={<PersonalInfo />} />
+        <Route path="/studentServices" element={<StudentServices />} />
+        <Route path="/employeeServices" element={<EmployeeServices />} />
+        <Route path="/financialAid" element={<FinancialAid />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/regplan" element={<RegPlan />} />
+        <Route path="/studentregistration" element={<StudentRegisteration />} />
+        <Route path="/personalprofile" element={<PersonalProfile />} />
+        <Route path="/studentprofile" element={<StudentProfile />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="/employeedashboard" element={<EmployeeDashboard />} />
+        <Route path="/employeetimesheet" element={<EmployeeTimesheet />} />
+        <Route path="/studentrecords" element={<StudentRecords />} />
+        <Route path="/financialAidDashboard" element={<FinancialDashboard />} />
+        <Route path="/graduationdateaccordion" element={<GraduationDateAccordion />} />
 
-      </Router >
+      </Routes >
     </div >
     // </div >
   )
