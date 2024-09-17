@@ -9,7 +9,7 @@ const Registration = () => {
 
     useEffect(() => {
         getRegistration().then((response) => setRegisterOption(response));
-    }, []);
+    }, [getRegistration]);
 
     return (
         <Box

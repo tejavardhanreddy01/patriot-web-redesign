@@ -9,7 +9,7 @@ const RegPlan = () => {
 
     useEffect(() => {
         getRegPlan().then((response) => setRegPlan(response));
-    }, []);
+    }, [getRegPlan]);
 
     return (
         <Box
