@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-    Box, Typography, IconButton, Card, CardContent, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Button, Avatar, Accordion, AccordionSummary, AccordionDetails
-} from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+    Box, Typography, Card, CardContent, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Button, Avatar, Accordion, AccordionSummary} from '@mui/material';
+/*import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete'; */
 import PersonIcon from '@mui/icons-material/Person';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -22,10 +21,10 @@ const FinancialDashboard = () => {
     const [open, setOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState(null);
 
-    const handleOpen = (category) => {
+    /*const handleOpen = (category) => {
         setEditingCategory(category);
         setOpen(true);
-    };
+    }; */
 
     const handleClose = () => {
         setOpen(false);
@@ -44,12 +43,12 @@ const FinancialDashboard = () => {
         }));
     };
 
-    const handleDelete = (category) => {
+    /*const handleDelete = (category) => {
         setUserInfo((prev) => ({
             ...prev,
             [category]: {},
         }));
-    };
+    }; */
 
     // Function to render all fields in the modal for editing
     const renderFields = () => {
