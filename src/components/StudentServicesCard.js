@@ -42,7 +42,7 @@ const Cards = ({ studentServices }) => {
                             position: 'relative',
                         }}    >
 
-                        {/* <Avatar src={studentServices.avatar.file.url} sx={{ '--Avatar-size': '6rem' }} /> */}
+                        <Avatar src={studentServices.avatar.file.url} sx={{ '--Avatar-size': '6rem' }} />
 
                     </AspectRatio>
                 </CardOverflow>
