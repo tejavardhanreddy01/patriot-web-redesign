@@ -1,7 +1,6 @@
 import React from "react";
 import HomePage from "./Pages/HomePage/HomePage";
 import PersonalInfo from "./Pages/HomePage/PersonalInfo";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import StudentServices from "./Pages/HomePage/StudentServices";
 import EmployeeServices from "./Pages/HomePage/EmpServices";
 import FinancialAid from "./Pages/HomePage/FinancialAid";
@@ -18,14 +17,11 @@ import FinancialDashboard from "./Pages/FinancialAidServices/FinancialDashboard"
 import StudentRecords from "./Pages/StudentServices/StudentRecords";
 import GraduationDateAccordion from "./Pages/StudentServices/GraduationDateAccordion";
 
-// import FinancialInfo from "./Pages/Financial Aid/FinancialInfo";
-
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 export default function App() {
   return (
-    <div>
-      {/* <div style={{ backgroundColor: '#4CAF50', minHeight: '100vh' }}> Set background color and full height */}
-
+    <Router>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -44,9 +40,7 @@ export default function App() {
         <Route path="/studentrecords" element={<StudentRecords />} />
         <Route path="/financialAidDashboard" element={<FinancialDashboard />} />
         <Route path="/graduationdateaccordion" element={<GraduationDateAccordion />} />
-
-      </Routes >
-    </div >
-    // </div >
-  )
+      </Routes>
+    </Router>
+  );
 }
