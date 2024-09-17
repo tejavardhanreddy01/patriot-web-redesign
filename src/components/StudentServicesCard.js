@@ -7,10 +7,15 @@ import CardActions from '@mui/joy/CardActions';
 import CardContent from '@mui/joy/CardContent';
 import CardOverflow from '@mui/joy/CardOverflow';
 import Typography from '@mui/joy/Typography';
+import { Avatar } from "@mui/joy";
 import { Link } from "@mui/material";
 
 
 const Cards = ({ studentServices }) => {
+
+    const imageUrl = studentServices?.avatar?.fields?.file?.url
+        ? `https:${studentServices.avatar.fields.file.url}`  // Ensure the URL is prefixed with 'https:'
+        : 'https://via.placeholder.com/345x140';
 
     return (
         <div>
@@ -42,7 +47,7 @@ const Cards = ({ studentServices }) => {
                             position: 'relative',
                         }}    >
 
-                        <Avatar src={studentServices.avatar.file.url} sx={{ '--Avatar-size': '6rem' }} />
+                        <Avatar src={imageUrl} sx={{ '--Avatar-size': '6rem' }} />
 
                     </AspectRatio>
                 </CardOverflow>

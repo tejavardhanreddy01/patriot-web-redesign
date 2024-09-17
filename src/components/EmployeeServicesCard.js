@@ -7,11 +7,16 @@ import CardActions from '@mui/joy/CardActions';
 import CardContent from '@mui/joy/CardContent';
 import CardOverflow from '@mui/joy/CardOverflow';
 import Typography from '@mui/joy/Typography';
+import { Avatar } from '@mui/joy';
 
 import { Link } from "@mui/material";
 
 
 const employeeServicesCard = ({ employeeServices }) => {
+    const imageUrl = employeeServices?.avatar?.fields?.file?.url
+        ? `https:${employeeServices.avatar.fields.file.url}`  // Ensure the URL is prefixed with 'https:'
+        : 'https://via.placeholder.com/345x140';
+
 
     return (
         <div>
@@ -42,9 +47,9 @@ const employeeServicesCard = ({ employeeServices }) => {
                             bgcolor: 'background.surface',
                             position: 'relative',
                         }}    >
-                        {/* <div>
-                            <Avatar src={employeeServices.avatar.file.url} sx={{ '--Avatar-size': '6rem' }} />
-                        </div> */}
+                        <div>
+                            <Avatar src={imageUrl} sx={{ '--Avatar-size': '6rem' }} />
+                        </div>
                     </AspectRatio>
                 </CardOverflow>
                 <Typography level="title-lg" sx={{ mt: 'calc(var(--icon-size) / 2)' }}>
