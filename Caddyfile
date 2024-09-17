@@ -15,18 +15,18 @@
         format console
     }
 
-    # health check for railway
+    # health check for Railway
     respond /health 200
 
-    # serve from the 'build' folder (Create React App builds into the 'build' folder)
+    # Serve from the 'build' folder (Create React App builds into the 'build' folder)
     root * build
 
-    # enable gzipping responses
+    # Enable gzipping responses
     encode gzip
 
-    # serve files from 'build'
+    # Serve files from 'build'
     file_server
 
-    # if path doesn't exist, redirect it to 'index.html' for client-side routing
+    # Redirect any missing files or paths to 'index.html' for client-side routing
     try_files {path} /index.html
 }
