@@ -14,8 +14,8 @@ const getDaysInMonth = (year, month) => {
 
 const TimeSheet = () => {
     const today = new Date();
-    const [year, setYear] = useState(today.getFullYear());
-    const [month, setMonth] = useState(today.getMonth());
+    const [year] = useState(today.getFullYear());
+    const [month] = useState(today.getMonth());
     const [daysInMonth, setDaysInMonth] = useState([]);
     const [timesheet, setTimesheet] = useState({});
 

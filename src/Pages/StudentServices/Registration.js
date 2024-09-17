@@ -9,6 +9,7 @@ const Registration = () => {
 
     useEffect(() => {
         getRegistration().then((response) => setRegisterOption(response));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

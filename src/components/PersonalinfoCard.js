@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from "react";
+
 import AspectRatio from '@mui/joy/AspectRatio';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';

@@ -6,7 +6,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
-import { Details } from '@mui/icons-material';
+
 
 const PersonalProfile = () => {
     const [userInfo, setUserInfo] = useState({

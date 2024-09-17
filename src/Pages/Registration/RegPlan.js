@@ -7,8 +7,10 @@ const RegPlan = () => {
     const [regPlanning, setRegPlan] = useState([]);
     const { getRegPlan } = useContentful();
 
+
     useEffect(() => {
         getRegPlan().then((response) => setRegPlan(response));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from "react";
+
 import AspectRatio from '@mui/joy/AspectRatio';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
@@ -7,7 +7,6 @@ import CardActions from '@mui/joy/CardActions';
 import CardContent from '@mui/joy/CardContent';
 import CardOverflow from '@mui/joy/CardOverflow';
 import Typography from '@mui/joy/Typography';
-import Avatar from '@mui/joy/Avatar';
 import { Link } from "@mui/material";
 
 
@@ -18,7 +17,6 @@ const Cards = ({ studentServices }) => {
             <Card
                 // data-resizable
                 sx={{
-                    width: 250,
                     height: 300,
                     display: 'flex',
                     flexDirection: 'column',

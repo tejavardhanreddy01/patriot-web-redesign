@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Avatar, Box, Typography, Link, Button, Card, CardContent, CardOverflow, AspectRatio } from '@mui/joy';
+import { Avatar, Typography, Link, Button, Card, CardContent, CardOverflow, AspectRatio } from '@mui/joy';
 
 const Cards = ({ categories }) => {
     return (
