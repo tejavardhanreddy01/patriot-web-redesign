@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-    Box, Typography, Card, CardContent, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Button, Avatar, Accordion, AccordionSummary, AccordionDetails
+    Box, Typography, Card, CardContent, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Button, Avatar, Accordion, AccordionSummary
 } from '@mui/material';
 
 import PersonIcon from '@mui/icons-material/Person';
