@@ -14,6 +14,8 @@ import HomeIcon from '@mui/icons-material/Home';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Link } from 'react-router-dom'; // Import Link from React Router
+import { Typography } from '@mui/material';
+import { Tooltip } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -160,6 +162,7 @@ export default function Header() {
             <AppBar position="static" sx={{ backgroundColor: 'darkgreen' }}>
                 <Toolbar>
                     <img src="./m1.webp" alt="Logo" />
+                    <Typography variant="h3" sx={{ display: 'flex', alignItems: 'center' }}>Patriot Web</Typography>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
@@ -169,36 +172,52 @@ export default function Header() {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
+
+
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         {/* Wrap HomeIcon with Link to navigate to home */}
-                        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
-                            <IconButton size="large" aria-label="go to home" color="inherit">
-                                <Badge color="error">
-                                    <HomeIcon />
-                                </Badge>
-                            </IconButton>
-                        </Link>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={1} color="error">
-                                <NotificationsIcon />
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Tooltip title="Takes you to the Home Page">
+                                <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+                                    <IconButton size="large" aria-label="go to home" color="inherit">
+                                        <Badge color="error">
+                                            <HomeIcon />
+                                        </Badge>
+                                    </IconButton>
+                                </Link>
+                            </Tooltip>
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Tooltip title="You have 1 notification">
+                                <IconButton
+                                    size="large"
+                                    aria-label="show 17 new notifications"
+                                    color="inherit"
+                                >
+                                    <Badge badgeContent={1} color="error">
+                                        <NotificationsIcon />
+                                    </Badge>
+                                </IconButton>
+                            </Tooltip>
+                        </div>
+
+
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Tooltip title="User Profile">
+                                <IconButton
+                                    size="large"
+                                    edge="end"
+                                    aria-label="account of current user"
+                                    aria-controls={menuId}
+                                    aria-haspopup="true"
+                                    onClick={handleProfileMenuOpen}
+                                    color="inherit"
+                                >
+                                    <AccountCircle />
+                                </IconButton>
+                            </Tooltip >
+                        </div>
                     </Box>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -216,6 +235,6 @@ export default function Header() {
             </AppBar>
             {renderMobileMenu}
             {renderMenu}
-        </Box>
+        </Box >
     );
 }

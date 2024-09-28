@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, IconButton, Card, CardContent, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Button, Avatar } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 import PersonIcon from '@mui/icons-material/Person';
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -11,10 +11,10 @@ import EmailIcon from "@mui/icons-material/Email";
 const PersonalProfile = () => {
     const [userInfo, setUserInfo] = useState({
         PersonalInfo: { UserName: '', Email: '', HomeAddress: '', PhoneNumber: '', GNumber: '' },
-        PersonalDetails: { FirstName: '', MiddleName: '', LastName: '', DOB: '', Sex: '', PersonalPronoun: '', GenderId: '' },
+        PersonalDetails: { FirstName: '', MiddleName: '', LastName: '', DateofBirth: '', Sex: '', PersonalPronoun: '', GenderIdentification: '' },
         Email: { GMUEmail: '', FAFSAParentEmail: '', FAFSAStudentEmail: '', OtherEmail1: '', OtherEmail2: '' },
         PhoneNumber: { phonenum1: '', phonenum2: '', premresphone: '' },
-        Address: { HomeAddress: '' },
+        Address: { PermanentAddress: '' },
         EmergencyContact: { EmergencyCont: '' },
         AdditionalDetails: { EthnicityRace: '', VeteranClass: '', DisabilityStatus: '' }
     });
@@ -36,12 +36,53 @@ const PersonalProfile = () => {
         handleClose();
     };
 
+    const isLetterOnly = (value) => /^[a-zA-Z\s]*$/.test(value);
+    const isIntegerOnly = (value) => /^\d*$/.test(value);
+
+
+
     const handleChange = (e, category) => {
         const { name, value } = e.target;
-        setUserInfo((prev) => ({
-            ...prev,
-            [category]: { ...prev[category], [name]: value },
-        }));
+        // Determine the field type based on the category
+        let isValid = true;
+
+        switch (name) {
+            case 'FirstName':
+            case 'MiddleName':
+            case 'LastName':
+            case 'UserName':
+            case 'Email':
+            case 'HomeAddress':
+            case 'PersonalPronoun':
+            case 'Sex':
+            case 'GenderIdentification':
+                isValid = isLetterOnly(value);
+                break;
+            case 'PhoneNumber':
+            case 'GNumber':
+            case 'phonenum1':
+            case 'phonenum2':
+            case 'premresphone':
+                isValid = isIntegerOnly(value);
+                break;
+            case 'DateofBirth':
+                // You can add any date validation here if needed
+                isValid = true; // Allow any input for now
+                break;
+            default:
+                break;
+        }
+
+
+        // Update state only if valid
+        if (isValid) {
+
+
+            setUserInfo((prev) => ({
+                ...prev,
+                [category]: { ...prev[category], [name]: value },
+            }));
+        }
     };
 
     const handleDelete = (category) => {
@@ -95,9 +136,7 @@ const PersonalProfile = () => {
                                 <IconButton onClick={() => handleOpen('PersonalInfo')}>
                                     <EditIcon sx={{ color: 'black' }} />
                                 </IconButton>
-                                <IconButton onClick={() => handleDelete('PersonalInfo')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
+
                             </Box>
                         </CardContent>
                     </Card>
@@ -118,141 +157,34 @@ const PersonalProfile = () => {
                                     <Typography><strong>First Name:</strong> <br />{userInfo.PersonalDetails.FirstName || 'Not Provided'}</Typography>
                                     <Typography><strong>Middle Name:</strong><br /> {userInfo.PersonalDetails.MiddleName || 'Not Provided'}</Typography>
                                     <Typography><strong>Last Name:</strong><br /> {userInfo.PersonalDetails.LastName || 'Not Provided'}</Typography>
-                                    <Typography><strong>Date of Birth:</strong> <br />{userInfo.PersonalDetails.DOB || 'Not Provided'}</Typography>
+                                    {/* Date of Birth as a Date Picker */}
+                                    <TextField
+                                        label="Date of Birth"
+                                        type="date"
+                                        name="Date of Birth"
+                                        value={userInfo.PersonalDetails.DOB || ''}
+                                        onChange={(e) => handleChange(e, 'PersonalDetails')}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        fullWidth
+                                        margin="normal"
+                                    />
                                     <Typography><strong>Legal Sex:</strong><br /> {userInfo.PersonalDetails.Sex || 'Not Provided'}</Typography>
                                     <Typography><strong>Personal Pronoun:</strong> <br />{userInfo.PersonalDetails.PersonalPronoun || 'Not Provided'}</Typography>
-                                    <Typography><strong>Gender Identification:</strong><br /> {userInfo.PersonalDetails.GenderId || 'Not Provided'}</Typography>
+                                    <Typography><strong>Gender Identification:</strong><br /> {userInfo.PersonalDetails.GenderIdentification || 'Not Provided'}</Typography>
                                 </Box>
                             </Box>
                             <Box>
                                 <IconButton onClick={() => handleOpen('PersonalDetails')}>
                                     <EditIcon sx={{ color: 'black' }} />
                                 </IconButton>
-                                <IconButton onClick={() => handleDelete('PersonalDetails')}>
+                                {/* <IconButton onClick={() => handleDelete('PersonalDetails')}>
                                     <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
+                                </IconButton> */}
                             </Box>
                         </CardContent>
                     </Card>
-                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
-                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
-                                <PersonIcon />
-                            </Avatar>
-                            <Box sx={{ flex: 1 }}>
-                                <Typography variant="h6">Email Details</Typography>
-                                <p>-----------------------------</p>
-                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-                                    <Typography><strong>GMU Email ID:</strong> {userInfo.PersonalDetails.GMUEmailID || 'Not Provided'}</Typography>
-                                    <Typography><strong>Email ID:</strong> {userInfo.PersonalDetails.EmailID || 'Not Provided'}</Typography>
-
-                                </Box>
-                            </Box>
-                            <Box>
-                                <IconButton onClick={() => handleOpen('Email')}>
-                                    <EditIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                                <IconButton onClick={() => handleDelete('Email')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                            </Box>
-                        </CardContent>
-                    </Card>
-
-                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
-                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
-                                <PersonIcon />
-                            </Avatar>
-                            <Box sx={{ flex: 1 }}>
-                                <Typography variant="h6">Phone Number</Typography>
-                                <p>-----------------------------</p>
-                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-                                    <Typography><strong>Phone Number:</strong> {userInfo.PersonalDetails.PhoneNumber || 'Not Provided'}</Typography>
-
-                                </Box>
-                            </Box>
-                            <Box>
-                                <IconButton onClick={() => handleOpen('PhoneNumber')}>
-                                    <EditIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                                <IconButton onClick={() => handleDelete('PhoneNumber')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                            </Box>
-                        </CardContent>
-                    </Card>
-
-                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
-                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
-                                <PersonIcon />
-                            </Avatar>
-                            <Box sx={{ flex: 1 }}>
-                                <Typography variant="h6">Off Campus Residence</Typography>
-                                <p>-----------------------------</p>
-                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-                                    <Typography><strong>Address:</strong> {userInfo.PersonalDetails.Address || 'Not Provided'}</Typography>
-
-                                </Box>
-                            </Box>
-                            <Box>
-                                <IconButton onClick={() => handleOpen('OffcampusResidence')}>
-                                    <EditIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                                <IconButton onClick={() => handleDelete('OffcampusResidence')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                            </Box>
-                        </CardContent>
-                    </Card>
-                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
-                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
-                                <PersonIcon />
-                            </Avatar>
-                            <Box sx={{ flex: 1 }}>
-                                <Typography variant="h6">EmergencyContact</Typography>
-                                <p>-----------------------------</p>
-                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-                                    <Typography><strong>Address:</strong> {userInfo.PersonalDetails.Address || 'Not Provided'}</Typography>
-                                    <Typography><strong>PhoneNumber:</strong> {userInfo.PersonalDetails.PhoneNumber || 'Not Provided'}</Typography>
-
-                                </Box>
-                            </Box>
-                            <Box>
-                                <IconButton onClick={() => handleOpen('EmergencyContact')}>
-                                    <EditIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                                <IconButton onClick={() => handleDelete('EmergencyContact')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                            </Box>
-                        </CardContent>
-                    </Card>
-                    <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
-                        <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
-                                <PersonIcon />
-                            </Avatar>
-                            <Box sx={{ flex: 1 }}>
-                                <Typography variant="h6">additional Details</Typography>
-                                <p>-----------------------------</p>
-                                <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-                                    <Typography><strong></strong> {userInfo.PersonalDetails.additionalDetails || 'Not Provided'}</Typography>
-                                </Box>
-                            </Box>
-                            <Box>
-                                <IconButton onClick={() => handleOpen('additionalDetails')}>
-                                    <EditIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                                <IconButton onClick={() => handleDelete('additionalDetails')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                            </Box>
-                        </CardContent>
-                    </Card>
-
 
                     {/* Additional Information Card */}
                     <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
@@ -276,9 +208,7 @@ const PersonalProfile = () => {
                                 <IconButton onClick={() => handleOpen('Email')}>
                                     <EditIcon sx={{ color: 'black' }} />
                                 </IconButton>
-                                <IconButton onClick={() => handleDelete('Email')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
+
                             </Box>
                         </CardContent>
                     </Card>
@@ -301,9 +231,7 @@ const PersonalProfile = () => {
                                 <IconButton onClick={() => handleOpen('PhoneNumber')}>
                                     <EditIcon sx={{ color: 'black' }} />
                                 </IconButton>
-                                <IconButton onClick={() => handleDelete('PhoneNumber')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
+
                             </Box>
                         </CardContent>
                     </Card>
@@ -316,17 +244,15 @@ const PersonalProfile = () => {
                                 <Typography variant="h6"><strong>Address</strong></Typography>
                                 <p>-----------------------------</p>
                                 <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-                                    <Typography><strong>Permanent Residence</strong> <br />{userInfo.Address.HomeAddress || 'Not Provided'}</Typography>
+                                    <Typography><strong>Permanent Residence</strong> <br />{userInfo.Address.PermanentAddress || 'Not Provided'}</Typography>
 
                                 </Box>
                             </Box>
                             <Box>
-                                <IconButton onClick={() => handleOpen('Home')}>
+                                <IconButton onClick={() => handleOpen('Address')}>
                                     <EditIcon sx={{ color: 'black' }} />
                                 </IconButton>
-                                <IconButton onClick={() => handleDelete('Home')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
+
                             </Box>
                         </CardContent>
                     </Card>
@@ -347,9 +273,7 @@ const PersonalProfile = () => {
                                 <IconButton onClick={() => handleOpen('EmergencyContact')}>
                                     <EditIcon sx={{ color: 'black' }} />
                                 </IconButton>
-                                <IconButton onClick={() => handleDelete('EmergencyContact')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
+
                             </Box>
                         </CardContent>
                     </Card>
@@ -369,9 +293,7 @@ const PersonalProfile = () => {
                                 <IconButton onClick={() => handleOpen('AdditionalDetails')}>
                                     <EditIcon sx={{ color: 'black' }} />
                                 </IconButton>
-                                <IconButton onClick={() => handleDelete('AdditionalDetails')}>
-                                    <DeleteIcon sx={{ color: 'black' }} />
-                                </IconButton>
+
                             </Box>
                         </CardContent>
                     </Card>
