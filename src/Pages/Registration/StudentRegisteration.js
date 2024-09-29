@@ -46,7 +46,7 @@ function ChildModal({ addClass }) {
 
     const handleSearchCourse = () => {
         const foundCourse = courseDatabase.find(course =>
-            course.subject === subject && course.courseNumber === courseNumber
+            course.subject === subject || course.courseNumber === courseNumber
         );
         setCourseFound(foundCourse || null); // Clear if not found
     };
@@ -60,9 +60,7 @@ function ChildModal({ addClass }) {
 
     return (
         <React.Fragment>
-            <Button onClick={handleOpen}>Submit</Button>
-
-
+            <Button onClick={handleOpen}>Add Class</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -124,6 +122,7 @@ function ChildModal({ addClass }) {
 export default function NestedModal() {
     const [open, setOpen] = React.useState(false);
     const [schedule, setSchedule] = React.useState([]);
+    const [termSelected, setTermSelected] = React.useState(false); // New state to track if term is selected
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -131,11 +130,18 @@ export default function NestedModal() {
     const addClass = (newClass) => setSchedule([...schedule, newClass]);
     const removeClass = (index) => setSchedule(schedule.filter((_, i) => i !== index));
 
+    const handleTermSelect = () => {
+        setTermSelected(true);
+        handleClose();
+    };
+
     return (
         <div>
-            <Button onClick={handleOpen} sx={{ border: '2px solid #4CAF50', padding: '10px 20px', borderRadius: '5px', marginTop: 5, marginLeft: 5 }}>
-                Select a Term to Register
-            </Button>
+            {!termSelected && (
+                <Button onClick={handleOpen} sx={{ border: '2px solid #4CAF50', padding: '10px 20px', borderRadius: '5px', marginTop: 5, marginLeft: 5 }}>
+                    Select a Term to Register
+                </Button>
+            )}
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -167,32 +173,35 @@ export default function NestedModal() {
                             </TextField>
                         </div>
                     </Box>
-                    <ChildModal addClass={addClass} />
+                    <Button onClick={handleTermSelect}>Submit</Button>
                 </Box>
             </Modal>
 
             {/* Displaying the Schedule */}
-            <Box sx={{ mt: 4, marginLeft: 5 }}>
-                <h3>Your Schedule</h3>
-                {schedule.length === 0 ? (
-                    <p>No classes added yet.</p>
-                ) : (
-                    <List>
-                        {schedule.map((course, index) => (
-                            <ListItem key={index} secondaryAction={
-                                <IconButton edge="end" onClick={() => removeClass(index)}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            }>
-                                <ListItemText
-                                    primary={`${course.subject} ${course.courseNumber} - ${course.courseName}`}
-                                    secondary={`Professor: ${course.professor} | Credits: ${course.credits}`}
-                                />
-                            </ListItem>
-                        ))}
-                    </List>
-                )}
-            </Box>
+            {termSelected && (
+                <Box sx={{ mt: 4, marginLeft: 5 }}>
+                    <h3>Your Schedule</h3>
+                    {schedule.length === 0 ? (
+                        <p>No classes added yet.</p>
+                    ) : (
+                        <List>
+                            {schedule.map((course, index) => (
+                                <ListItem key={index} secondaryAction={
+                                    <IconButton edge="end" onClick={() => removeClass(index)}>
+                                        <DeleteIcon />
+                                    </IconButton>
+                                }>
+                                    <ListItemText
+                                        primary={`${course.subject} ${course.courseNumber} - ${course.courseName}`}
+                                        secondary={`Professor: ${course.professor} | Credits: ${course.credits}`}
+                                    />
+                                </ListItem>
+                            ))}
+                        </List>
+                    )}
+                    <ChildModal addClass={addClass} />
+                </Box>
+            )}
         </div>
     );
 }
