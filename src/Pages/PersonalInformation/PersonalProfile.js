@@ -27,9 +27,9 @@ import EmailIcon from '@mui/icons-material/Email';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
 const ethnicities = [
-    'African', 'African American', 'Afro-Caribbean', 'Arab', 'Asian', 
-    'South Asian', 'Southeast Asian', 'European', 'Hispanic or Latino', 
-    'Indigenous or Native American', 'Pacific Islander', 'Jewish', 
+    'African', 'African American', 'Afro-Caribbean', 'Arab', 'Asian',
+    'South Asian', 'Southeast Asian', 'European', 'Hispanic or Latino',
+    'Indigenous or Native American', 'Pacific Islander', 'Jewish',
     'Middle Eastern', 'Mixed or Multiethnic', 'White or Caucasian', "Don't want to mention"
 ];
 
@@ -68,7 +68,7 @@ const PersonalProfile = () => {
             setSsnError('SSNs do not match. Please enter again.');
             return;
         }
-        
+
         if (editingCategory === 'PersonalDetails' && (!userInfo.PersonalDetails.FirstName || !userInfo.PersonalDetails.LastName)) {
             setSsnError('First Name and Last Name are required.');
             return;
@@ -164,14 +164,14 @@ const PersonalProfile = () => {
                             ))}
                         </Select>
                     </FormControl>
-                    
+
                     <TextField
                         label="SSN"
                         name="SSN"
                         type="password" // Hide input with asterisks
                         value={userInfo.AdditionalDetails.SSN}
                         onChange={(e) => {
-                            const value = e.target.value.replace(/[^0-9]/g, ''); // Only allow numbers
+                            const value = e.target.value.replace(/[^0-9]/g, ''); // Only allows numbers
                             handleChange({ target: { name: 'SSN', value } }, 'AdditionalDetails');
                         }}
                         fullWidth
@@ -278,11 +278,10 @@ const PersonalProfile = () => {
                                 <Typography variant="h6"><strong>Email</strong></Typography>
                                 <p>-----------------------------</p>
                                 <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-                                    <Typography><strong>GMU E-mail Address (Preferred)</strong> <br />{userInfo.Email.GMUEmail || 'Not Provided'} <br /><strong>(Not Updateable)</strong></Typography>
-                                    <Typography><strong>Financial Aid Parent E-mail Address</strong><br /> {userInfo.Email.FAFSAParentEmail || 'Not Provided'}<br /><strong>(Not Updateable)</strong></Typography>
-                                    <Typography><strong>Financial Aid Student E-mail Address</strong><br /> {userInfo.Email.FAFSAStudentEmail || 'Not Provided'}<br /><strong>(Not Updateable)</strong></Typography>
-                                    <Typography><strong>Other E-mail Address</strong> <br />{userInfo.Email.OtherEmail1 || 'Not Provided'}</Typography>
-                                    <Typography><strong>Other E-mail Address</strong><br /> {userInfo.Email.OtherEmail2 || 'Not Provided'}</Typography>
+                                    <Typography><strong>GMU E-mail Address</strong> <br />{userInfo.Email.GMUEmail || 'Not Provided'} <br /></Typography>
+                                    <Typography><strong>Personal E-mail Address</strong> <br />{userInfo.Email.OtherEmail1 || 'Not Provided'}</Typography>
+                                    <Typography><strong>Financial Aid Parent E-mail Address</strong><br /> {userInfo.Email.FAFSAParentEmail || 'Not Provided'}<br /></Typography>
+                                    <Typography><strong>Financial Aid Student E-mail Address</strong><br /> {userInfo.Email.FAFSAStudentEmail || 'Not Provided'}<br /></Typography>
                                 </Box>
                             </Box>
                             <Box>

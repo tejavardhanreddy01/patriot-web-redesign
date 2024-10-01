@@ -15,13 +15,13 @@ const TimeSheet = () => {
         const currentDay = today.getDay();
         const weekDates = [];
         const startOfWeek = new Date(today.setDate(today.getDate() - (currentDay === 0 ? 6 : currentDay - 1)));
-        
+
         for (let i = 0; i < 5; i++) {
             const date = new Date(startOfWeek);
             date.setDate(startOfWeek.getDate() + i);
             weekDates.push(date);
         }
-        
+
         return weekDates;
     }, [today]);
 
@@ -61,8 +61,8 @@ const TimeSheet = () => {
 
             // Redirect back to Employee Dashboard after a delay
             setTimeout(() => {
-                navigate('/employeedashboard'); // Adjust the route as necessary
-            }, 1500); // 1 second delay
+                navigate('/employeedashboard');
+            }, 1500); // 1.5 second delay
         }
     };
 
