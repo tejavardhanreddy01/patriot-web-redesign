@@ -1,11 +1,46 @@
 import React, { useState } from 'react';
-import { Box, Typography, IconButton, Card, CardContent, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Button, Avatar } from '@mui/material';
+import {
+    Box,
+    Typography,
+    IconButton,
+    Card,
+    CardContent,
+    TextField,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogActions,
+    Button,
+    Avatar,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel
+} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
-import HomeIcon from "@mui/icons-material/Home";
+import HomeIcon from '@mui/icons-material/Home';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
-import ListAltIcon from '@mui/icons-material/ListAlt'; // Icon for Additional Details
+import ListAltIcon from '@mui/icons-material/ListAlt';
+
+const ethnicities = [
+    'African',
+    'African American',
+    'Afro-Caribbean',
+    'Arab',
+    'Asian',
+    'South Asian',
+    'Southeast Asian',
+    'European',
+    'Hispanic or Latino',
+    'Indigenous or Native American',
+    'Pacific Islander',
+    'Jewish',
+    'Middle Eastern',
+    'Mixed or Multiethnic',
+    'White or Caucasian'
+];
 
 const PersonalProfile = () => {
     const [userInfo, setUserInfo] = useState({
@@ -15,15 +50,17 @@ const PersonalProfile = () => {
         PhoneNumber: { phonenum1: '', phonenum2: '', premresphone: '' },
         Address: { PermanentAddress: '' },
         EmergencyContact: { EmergencyCont: '' },
-        AdditionalDetails: { Ethnicity:'', SSNChange: '' }
+        AdditionalDetails: { EthnicityRace: '', SSN: '', SSNConfirm: '' }
     });
 
     const [open, setOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState(null);
+    const [ssnError, setSsnError] = useState('');
 
     const handleOpen = (category) => {
         setEditingCategory(category);
         setOpen(true);
+        setSsnError(''); // Reset SSN error when opening dialog
     };
 
     const handleClose = () => {
@@ -32,6 +69,10 @@ const PersonalProfile = () => {
     };
 
     const handleSave = () => {
+        if (editingCategory === 'AdditionalDetails' && userInfo.AdditionalDetails.SSN !== userInfo.AdditionalDetails.SSNConfirm) {
+            setSsnError('SSNs do not match. Please enter again.');
+            return;
+        }
         handleClose();
     };
 
@@ -45,6 +86,54 @@ const PersonalProfile = () => {
 
     const renderFields = () => {
         if (!editingCategory) return null;
+
+        if (editingCategory === 'AdditionalDetails') {
+            return (
+                <>
+                    <FormControl fullWidth margin="normal">
+                        <InputLabel>Ethnicity</InputLabel>
+                        <Select
+                            name="EthnicityRace"
+                            value={userInfo.AdditionalDetails.EthnicityRace}
+                            onChange={(e) => handleChange(e, 'AdditionalDetails')}
+                        >
+                            {ethnicities.map((ethnicity) => (
+                                <MenuItem key={ethnicity} value={ethnicity}>{ethnicity}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                   
+                    <TextField
+                        label="SSN"
+                        name="SSN"
+                        type="password" // Hide input with asterisks
+                        value={userInfo.AdditionalDetails.SSN}
+                        onChange={(e) => {
+                            const value = e.target.value.replace(/[^0-9]/g, ''); // Only allow numbers
+                            handleChange({ target: { name: 'SSN', value } }, 'AdditionalDetails');
+                        }}
+                        fullWidth
+                        margin="normal"
+                        inputProps={{ maxLength: 11 }} // Limit to 11 digits
+                    />
+                    <TextField
+                        label="Confirm SSN"
+                        name="SSNConfirm"
+                        type="password" // Hide input with asterisks
+                        value={userInfo.AdditionalDetails.SSNConfirm}
+                        onChange={(e) => {
+                            const value = e.target.value.replace(/[^0-9]/g, ''); // Only allow numbers
+                            handleChange({ target: { name: 'SSNConfirm', value } }, 'AdditionalDetails');
+                        }}
+                        fullWidth
+                        margin="normal"
+                        error={!!ssnError}
+                        helperText={ssnError}
+                        inputProps={{ maxLength: 11 }} // Limit to 11 digits
+                    />
+                </>
+            );
+        }
 
         return Object.keys(userInfo[editingCategory]).map((field) => (
             <TextField
@@ -160,9 +249,8 @@ const PersonalProfile = () => {
                                 <Typography variant="h6"><strong>Additional Details</strong></Typography>
                                 <p>-----------------------------</p>
                                 <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-                                    <Typography><strong>Ethnicity:</strong> <br />{userInfo.AdditionalDetails.Ethnicity || 'Not Provided'}</Typography>
-                                    
-                                    <Typography><strong>SSN:</strong> <br />{userInfo.AdditionalDetails.SSNChange || 'Not Provided'}</Typography>
+                                    <Typography><strong>Ethnicity:</strong> <br />{userInfo.AdditionalDetails.EthnicityRace || 'Not Provided'}</Typography>
+                                    <Typography><strong>SSN:</strong> <br />{userInfo.AdditionalDetails.SSN ? '*********' : 'Not Provided'}</Typography>
                                 </Box>
                             </Box>
                             <Box>
