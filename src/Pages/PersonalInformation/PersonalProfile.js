@@ -27,23 +27,13 @@ import EmailIcon from '@mui/icons-material/Email';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
 const ethnicities = [
-    'African',
-    'African American',
-    'Afro-Caribbean',
-    'Arab',
-    'Asian',
-    'South Asian',
-    'Southeast Asian',
-    'European',
-    'Hispanic or Latino',
-    'Indigenous or Native American',
-    'Pacific Islander',
-    'Jewish',
-    'Middle Eastern',
-    'Mixed or Multiethnic',
-    'White or Caucasian',
-    "Don't want to mention"
+    'African', 'African American', 'Afro-Caribbean', 'Arab', 'Asian', 
+    'South Asian', 'Southeast Asian', 'European', 'Hispanic or Latino', 
+    'Indigenous or Native American', 'Pacific Islander', 'Jewish', 
+    'Middle Eastern', 'Mixed or Multiethnic', 'White or Caucasian', "Don't want to mention"
 ];
+
+const genders = ['Male', 'Female', "Don't want to mention"];
 
 const PersonalProfile = () => {
     const [userInfo, setUserInfo] = useState({
@@ -60,6 +50,7 @@ const PersonalProfile = () => {
     const [editingCategory, setEditingCategory] = useState(null);
     const [ssnError, setSsnError] = useState('');
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
 
     const handleOpen = (category) => {
         setEditingCategory(category);
@@ -77,8 +68,14 @@ const PersonalProfile = () => {
             setSsnError('SSNs do not match. Please enter again.');
             return;
         }
+        
+        if (editingCategory === 'PersonalDetails' && (!userInfo.PersonalDetails.FirstName || !userInfo.PersonalDetails.LastName)) {
+            setSsnError('First Name and Last Name are required.');
+            return;
+        }
 
-        setSnackbarOpen(true); // Open snackbar on save
+        setSnackbarMessage(`${editingCategory} saved successfully!`);
+        setSnackbarOpen(true);
         handleClose();
     };
 
@@ -92,6 +89,65 @@ const PersonalProfile = () => {
 
     const renderFields = () => {
         if (!editingCategory) return null;
+
+        if (editingCategory === 'PersonalDetails') {
+            return (
+                <>
+                    <TextField
+                        label="First Name"
+                        name="FirstName"
+                        value={userInfo.PersonalDetails.FirstName}
+                        onChange={(e) => handleChange(e, 'PersonalDetails')}
+                        fullWidth
+                        margin="normal"
+                        required
+                        error={!userInfo.PersonalDetails.FirstName}
+                        helperText={!userInfo.PersonalDetails.FirstName ? 'First Name is required.' : ''}
+                    />
+                    <TextField
+                        label="Middle Name"
+                        name="MiddleName"
+                        value={userInfo.PersonalDetails.MiddleName}
+                        onChange={(e) => handleChange(e, 'PersonalDetails')}
+                        fullWidth
+                        margin="normal"
+                    />
+                    <TextField
+                        label="Last Name"
+                        name="LastName"
+                        value={userInfo.PersonalDetails.LastName}
+                        onChange={(e) => handleChange(e, 'PersonalDetails')}
+                        fullWidth
+                        margin="normal"
+                        required
+                        error={!userInfo.PersonalDetails.LastName}
+                        helperText={!userInfo.PersonalDetails.LastName ? 'Last Name is required.' : ''}
+                    />
+                    <TextField
+                        label="Date of Birth"
+                        type="date"
+                        name="DateofBirth"
+                        value={userInfo.PersonalDetails.DateofBirth || ''}
+                        onChange={(e) => handleChange(e, 'PersonalDetails')}
+                        InputLabelProps={{ shrink: true }}
+                        fullWidth
+                        margin="normal"
+                    />
+                    <FormControl fullWidth margin="normal">
+                        <InputLabel>Gender</InputLabel>
+                        <Select
+                            name="GenderIdentification"
+                            value={userInfo.PersonalDetails.GenderIdentification}
+                            onChange={(e) => handleChange(e, 'PersonalDetails')}
+                        >
+                            {genders.map((gender) => (
+                                <MenuItem key={gender} value={gender}>{gender}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                </>
+            );
+        }
 
         if (editingCategory === 'AdditionalDetails') {
             return (
@@ -200,21 +256,9 @@ const PersonalProfile = () => {
                                     <Typography><strong>First Name:</strong> <br />{userInfo.PersonalDetails.FirstName || 'Not Provided'}</Typography>
                                     <Typography><strong>Middle Name:</strong><br /> {userInfo.PersonalDetails.MiddleName || 'Not Provided'}</Typography>
                                     <Typography><strong>Last Name:</strong><br /> {userInfo.PersonalDetails.LastName || 'Not Provided'}</Typography>
-                                    <TextField
-                                        label="Date of Birth"
-                                        type="date"
-                                        name="DateofBirth"
-                                        value={userInfo.PersonalDetails.DateofBirth || ''}
-                                        onChange={(e) => handleChange(e, 'PersonalDetails')}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        fullWidth
-                                        margin="normal"
-                                    />
-                                    <Typography><strong>Legal Sex:</strong><br /> {userInfo.PersonalDetails.Sex || 'Not Provided'}</Typography>
+                                    <Typography><strong>Date of Birth:</strong><br /> {userInfo.PersonalDetails.DateofBirth || 'Not Provided'}</Typography>
+                                    <Typography><strong>Legal Sex:</strong><br /> {userInfo.PersonalDetails.GenderIdentification || 'Not Provided'}</Typography>
                                     <Typography><strong>Personal Pronoun:</strong> <br />{userInfo.PersonalDetails.PersonalPronoun || 'Not Provided'}</Typography>
-                                    <Typography><strong>Gender Identification:</strong><br /> {userInfo.PersonalDetails.GenderIdentification || 'Not Provided'}</Typography>
                                 </Box>
                             </Box>
                             <Box>
@@ -289,7 +333,7 @@ const PersonalProfile = () => {
                 onClose={handleSnackbarClose}
             >
                 <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
-                    Data saved successfully!
+                    {snackbarMessage}
                 </Alert>
             </Snackbar>
         </Box>
