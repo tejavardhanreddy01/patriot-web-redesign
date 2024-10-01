@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import {
     Box, Typography, Card, CardContent, TextField, Dialog, DialogTitle, DialogContent, DialogActions, Button, Avatar, Accordion, AccordionSummary
 } from '@mui/material';
-
+/*import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete'; */
 import PersonIcon from '@mui/icons-material/Person';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -25,6 +26,10 @@ const FinancialDashboard = () => {
     //     setEditingCategory(category);
     //     setOpen(true);
     // };
+    /*const handleOpen = (category) => {
+        setEditingCategory(category);
+        setOpen(true);
+    }; */
 
     const handleClose = () => {
         setOpen(false);
@@ -49,6 +54,12 @@ const FinancialDashboard = () => {
     //         [category]: {},
     //     }));
     // };
+    /*const handleDelete = (category) => {
+        setUserInfo((prev) => ({
+            ...prev,
+            [category]: {},
+        }));
+    }; */
 
     // Function to render all fields in the modal for editing
     const renderFields = () => {

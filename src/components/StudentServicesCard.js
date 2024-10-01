@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import AspectRatio from '@mui/joy/AspectRatio';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
@@ -27,7 +26,7 @@ const Cards = ({ studentServices }) => {
                     flexDirection: 'column',
                     textAlign: 'center',
                     alignItems: 'center',
-                    width: 343,
+                    //width: 343,
                     // to make the demo resizable
                     overflow: 'hidden',
                     '--icon-size': '100px',

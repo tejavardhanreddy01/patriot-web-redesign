@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import AspectRatio from '@mui/joy/AspectRatio';
 import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
@@ -7,7 +6,6 @@ import CardActions from '@mui/joy/CardActions';
 import CardContent from '@mui/joy/CardContent';
 import CardOverflow from '@mui/joy/CardOverflow';
 import Typography from '@mui/joy/Typography';
-
 import { Link } from "@mui/material";
 
 
@@ -22,7 +20,7 @@ const RegistrationCard = ({ registration }) => {
                     display: 'flex',
                     flexDirection: 'column',
                     textAlign: 'center',
-                    width: 343,
+                    //width: 343,
                     // to make the demo resizable
                     overflow: 'hidden',
                     '--icon-size': '100px',
