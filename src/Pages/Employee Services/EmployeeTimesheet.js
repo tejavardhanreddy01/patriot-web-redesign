@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Box, Typography, Button, Grid, TextField, Alert, Paper } from '@mui/material';
 
 const TimeSheet = () => {
-    const today = new Date();
+    const today = useMemo(() => new Date(), []); // Memoize today
     const [timesheet, setTimesheet] = useState({});
     const [dates, setDates] = useState([]);
     const [error, setError] = useState('');
 
-    // Function to get the current week's dates (Monday to Friday)
-    const getWeekDates = () => {
+    // Memoized function to get the current week's dates (Monday to Friday)
+    const getWeekDates = useCallback(() => {
         const currentDay = today.getDay();
         const weekDates = [];
 
@@ -22,7 +22,7 @@ const TimeSheet = () => {
         }
         
         return weekDates;
-    };
+    }, [today]); // Add today as a dependency
 
     // Update dates for the timesheet on component mount
     useEffect(() => {
@@ -35,7 +35,7 @@ const TimeSheet = () => {
             initialTimesheet[date.toLocaleDateString()] = '';
         });
         setTimesheet(initialTimesheet);
-    }, []);
+    }, [getWeekDates]); // Include getWeekDates in the dependency array
 
     // Handle input for working hours
     const handleHoursChange = (date, e) => {
