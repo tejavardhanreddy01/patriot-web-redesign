@@ -15,7 +15,9 @@ import {
     Select,
     MenuItem,
     FormControl,
-    InputLabel
+    InputLabel,
+    Snackbar,
+    Alert
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
@@ -39,7 +41,8 @@ const ethnicities = [
     'Jewish',
     'Middle Eastern',
     'Mixed or Multiethnic',
-    'White or Caucasian'
+    'White or Caucasian',
+    "Don't want to mention"
 ];
 
 const PersonalProfile = () => {
@@ -56,6 +59,7 @@ const PersonalProfile = () => {
     const [open, setOpen] = useState(false);
     const [editingCategory, setEditingCategory] = useState(null);
     const [ssnError, setSsnError] = useState('');
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
 
     const handleOpen = (category) => {
         setEditingCategory(category);
@@ -73,6 +77,8 @@ const PersonalProfile = () => {
             setSsnError('SSNs do not match. Please enter again.');
             return;
         }
+
+        setSnackbarOpen(true); // Open snackbar on save
         handleClose();
     };
 
@@ -102,7 +108,7 @@ const PersonalProfile = () => {
                             ))}
                         </Select>
                     </FormControl>
-                   
+                    
                     <TextField
                         label="SSN"
                         name="SSN"
@@ -146,6 +152,10 @@ const PersonalProfile = () => {
                 margin="normal"
             />
         ));
+    };
+
+    const handleSnackbarClose = () => {
+        setSnackbarOpen(false);
     };
 
     return (
@@ -239,7 +249,6 @@ const PersonalProfile = () => {
                         </CardContent>
                     </Card>
 
-                    {/* Updated Additional Details Card */}
                     <Card sx={{ boxShadow: 3, flex: '1 1 auto' }}>
                         <CardContent sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                             <Avatar sx={{ marginRight: 2, width: 56, height: 56 }}>
@@ -250,7 +259,7 @@ const PersonalProfile = () => {
                                 <p>-----------------------------</p>
                                 <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
                                     <Typography><strong>Ethnicity:</strong> <br />{userInfo.AdditionalDetails.EthnicityRace || 'Not Provided'}</Typography>
-                                    <Typography><strong>SSN:</strong> <br />{userInfo.AdditionalDetails.SSN ? '*********' : 'Not Provided'}</Typography>
+                                    <Typography><strong>SSN:</strong> <br />{userInfo.AdditionalDetails.SSN ? '******' : 'Not Provided'}</Typography>
                                 </Box>
                             </Box>
                             <Box>
@@ -273,6 +282,16 @@ const PersonalProfile = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+            >
+                <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
+                    Data saved successfully!
+                </Alert>
+            </Snackbar>
         </Box>
     );
 };
