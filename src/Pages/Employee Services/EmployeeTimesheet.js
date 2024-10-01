@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Box, Typography, Button, Grid, TextField, Alert, Paper } from '@mui/material';
+import { Box, Typography, Button, Grid, TextField, Alert, Paper, Snackbar } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const TimeSheet = () => {
-    const today = useMemo(() => new Date(), []); // Memoize today
+    const navigate = useNavigate();
+    const today = useMemo(() => new Date(), []);
     const [timesheet, setTimesheet] = useState({});
     const [dates, setDates] = useState([]);
     const [error, setError] = useState('');
+    const [snackbarOpen, setSnackbarOpen] = useState(false); // Snackbar open state
+    const [snackbarMessage, setSnackbarMessage] = useState(''); // Snackbar message
 
-    // Memoized function to get the current week's dates (Monday to Friday)
     const getWeekDates = useCallback(() => {
         const currentDay = today.getDay();
         const weekDates = [];
-
-        // Find Monday of the current week (ISO Standard, Monday = 1)
         const startOfWeek = new Date(today.setDate(today.getDate() - (currentDay === 0 ? 6 : currentDay - 1)));
         
         for (let i = 0; i < 5; i++) {
@@ -22,22 +23,18 @@ const TimeSheet = () => {
         }
         
         return weekDates;
-    }, [today]); // Add today as a dependency
+    }, [today]);
 
-    // Update dates for the timesheet on component mount
     useEffect(() => {
         const weekDates = getWeekDates();
         setDates(weekDates);
-
-        // Initialize the timesheet state with empty values
         const initialTimesheet = {};
         weekDates.forEach(date => {
             initialTimesheet[date.toLocaleDateString()] = '';
         });
         setTimesheet(initialTimesheet);
-    }, [getWeekDates]); // Include getWeekDates in the dependency array
+    }, [getWeekDates]);
 
-    // Handle input for working hours
     const handleHoursChange = (date, e) => {
         const { value } = e.target;
         if (value < 0 || value > 24) {
@@ -48,11 +45,8 @@ const TimeSheet = () => {
         }
     };
 
-    // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Check if all fields are filled
         const allFieldsFilled = Object.values(timesheet).every(value => value !== '');
 
         if (!allFieldsFilled) {
@@ -60,8 +54,23 @@ const TimeSheet = () => {
         } else {
             setError('');
             console.log('Timesheet Submitted:', timesheet);
-            alert('Timesheet submitted successfully!');
+
+            // Display Snackbar message
+            setSnackbarMessage('Timesheet submitted successfully!');
+            setSnackbarOpen(true);
+
+            // Redirect back to Employee Dashboard after a delay
+            setTimeout(() => {
+                navigate('/employeedashboard'); // Adjust the route as necessary
+            }, 1500); // 1 second delay
         }
+    };
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbarOpen(false);
     };
 
     return (
@@ -71,7 +80,6 @@ const TimeSheet = () => {
                     Employee Timesheet - Week of {dates.length > 0 && dates[0].toLocaleDateString()}
                 </Typography>
 
-                {/* Display any error messages */}
                 {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
                 <form onSubmit={handleSubmit}>
@@ -85,7 +93,7 @@ const TimeSheet = () => {
                                     <TextField
                                         type="number"
                                         label="Hours"
-                                        inputProps={{ step: 0.1, min: 0, max: 24, inputMode: 'numeric' }} // Remove up/down arrows
+                                        inputProps={{ step: 0.1, min: 0, max: 24, inputMode: 'numeric' }}
                                         value={timesheet[date.toLocaleDateString()] || ''}
                                         onChange={(e) => handleHoursChange(date.toLocaleDateString(), e)}
                                         fullWidth
@@ -106,6 +114,18 @@ const TimeSheet = () => {
                     </Button>
                 </form>
             </Paper>
+
+            {/* Snackbar for submission message */}
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }} // Adjust position as needed
+            >
+                <Alert onClose={handleSnackbarClose} severity="success" sx={{ width: '100%' }}>
+                    {snackbarMessage}
+                </Alert>
+            </Snackbar>
         </Box>
     );
 };
